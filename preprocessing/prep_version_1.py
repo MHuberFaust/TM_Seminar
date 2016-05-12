@@ -15,6 +15,7 @@ for file in glob.glob('raw/*.xml'):
 
 from lxml import etree
 from _collections import defaultdict
+import re
 
 
 
@@ -50,14 +51,28 @@ def parseXML(directory):
         structMapElement = structMap[0]
         #print(etree.tostring(structMapElement, pretty_print=True))
         print(structMapElement.get('LABEL'))
-        
-        createFile()
+        label = structMapElement.get('LABEL')
+        fileList = d[item]
+        print (fileList)
+        createFile(label, fileList)
 
-def createFile():
+def createFile(label, fileList):
     '''
     ToDo: create File with name == structMapElement.get('LABEL') containing a cleansed version of the xmlfile as txt using philips script
+    files result in a collapsed version of every article (several finereaderfile > collapsed file
     '''
-
+    dir1 = '/Users/MHuber/Documents/SS2016/TopicModelling/noXML/' + label
+    dir2 = '/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/fulltext/'
+    for item in fileList:
+        
+        #opens finereaderfiles
+        with open (dir2 + item[3:]+'.xml','r', encoding = "utf-8") as r:
+            data = r.read()
+            with open (dir1, 'a', encoding = "utf-8" ) as f:
+                f.write(re.sub('¬ ', '', (re.sub('\n*<[^>]*>*\n*', '', (re.sub('</line>', ' ', data))))))
+        
+        
+        
 
 parseXML('/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/export_mets.xml')
         
