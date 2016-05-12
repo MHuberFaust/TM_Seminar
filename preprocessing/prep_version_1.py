@@ -16,6 +16,7 @@ for file in glob.glob('raw/*.xml'):
 from lxml import etree
 from _collections import defaultdict
 import re
+import os.path
 
 
 
@@ -63,13 +64,18 @@ def createFile(label, fileList):
     '''
     dir1 = '/Users/MHuber/Documents/SS2016/TopicModelling/noXML/' + label
     dir2 = '/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/fulltext/'
+    missingFiles=[]
     for item in fileList:
         
         #opens finereaderfiles
-        with open (dir2 + item[3:]+'.xml','r', encoding = "utf-8") as r:
-            data = r.read()
-            with open (dir1, 'a', encoding = "utf-8" ) as f:
-                f.write(re.sub('¬ ', '', (re.sub('\n*<[^>]*>*\n*', '', (re.sub('</line>', ' ', data))))))
+ 
+        if os.path.isfile(dir2 + item[4:]+'.xml'):
+            with open (dir2 + item[4:]+'.xml','r', encoding = "utf-8") as r:
+                data = r.read()
+                with open (dir1, 'a', encoding = "utf-8" ) as f:
+                    f.write(re.sub('¬ ', '', (re.sub('\n*<[^>]*>*\n*', '', (re.sub('</line>', ' ', data))))))
+        else:
+            missingFiles.append(item[4:])
         
         
         
