@@ -1,15 +1,10 @@
 '''
-philips stuff:
+ToDo:
+folgende Ordnerstruktur sollte erstellt werden:
 
-import re
-import glob
-
-
-for file in glob.glob('raw/*.xml'):
-    with open(file, 'r', encoding = "utf-8") as r:
-        f = r.read()
-        with open('pre/' + file[3:-4]  + '.txt', 'w', encoding = 'utf-8') as text: 
-            text.write(re.sub('¬ ', '', (re.sub('\n*<[^>]*>*\n*', '', (re.sub('</line>', ' ', f))))))
+Jahr -> Band ->Titel1
+            ->Titel2
+            ->Titel3
 
 '''
 
