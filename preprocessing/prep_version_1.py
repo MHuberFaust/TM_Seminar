@@ -46,21 +46,22 @@ def parseXML(directory):
    
         
     for item in d:
-        xpathE ='//mets:structMap//mets:div[@ID="'+item+'"]'
+        xpathE ='//mets:structMap[@TYPE="LOGICAL"]//mets:div[@ID="'+item+'"]'
         structMap = mets.xpath(xpathE, namespaces= {'mets':'http://www.loc.gov/METS/'})
         #print(structMap)
         structMapElement = structMap[0]
         #print(etree.tostring(structMapElement, pretty_print=True))
         print(structMapElement.get('LABEL'))
-        label = structMapElement.get('LABEL')
-        fileList = d[item]
-        print (fileList)
-        createFile(label, fileList)
+        if structMapElement.get('LABEL') != None:
+            label = structMapElement.get('LABEL')
+            fileList = d[item]
+            print (fileList)
+            createFile(label, fileList)
 
 def createFile(label, fileList):
     '''
-    ToDo: create File with name == structMapElement.get('LABEL') containing a cleansed version of the xmlfile as txt using philips script
-    files result in a collapsed version of every article (several finereaderfile > collapsed file
+    dir1 = wo die Datein hinsollen
+    dir2 = wo die Datein herkommen
     '''
     dir1 = '/Users/MHuber/Documents/SS2016/TopicModelling/noXML/' + label
     dir2 = '/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/fulltext/'
