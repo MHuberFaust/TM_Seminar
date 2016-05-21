@@ -66,7 +66,7 @@ def createFile(label, fileList, directory, outdir):
     dir1 = wo die Datein hinsollen
     dir2 = wo die Datein herkommen
     '''
-    dir1 = outdir + label[:12] + '\\' + re.sub('[^a-zA-Z0-9]', '_' , re.sub(' ', '' , label[12:])) + '.txt'
+    dir1 = outdir + label[:12] + '\\' + re.sub('[^a-zA-Z0-9]', '_' , re.sub(' ', '' , label[12:100])) + '.txt'
 
     
     dir2 = directory[:-15] + '\\fulltext\\'
