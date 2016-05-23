@@ -4,12 +4,14 @@
 # In[2]:
 
 '''
-ToDo:
 
-DocStrings schreiben
-            
-Wo geht die Reihenfolge verloren? (die Texte werden in der falschen Reihenfolge zusammengeklebt)
--> liegt es an dem returnvalue von etree.xpath?
+__author__ = "TM Seminar SoSe2016"
+__authors__ = "Philip Duerholt, Michael Huber"
+__email__ = "philip.duerholt@stud-mail.uni-wuerzburg.de, michael.huber@stud-mail.uni-wuerzburg.de"
+__license__ = ""
+__version__ = ""
+__date__ = 2016-05-23
+
 '''
 
 from lxml import etree

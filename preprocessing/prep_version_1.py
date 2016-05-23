@@ -1,14 +1,13 @@
 '''
 ToDo:
 folgende Ordnerstruktur sollte erstellt werden:
+falsche pointer die abgefangen werden loggen.
+ein Unterverzeichnis mit Jahreszahl_Titel ->Titel
 
-Jahr -> Band ->Titel1
-            ->Titel2
-            ->Titel3
-            
-Wo geht die Reihenfolge verloren? (die Texte werden in der falschen Reihenfolge zusammengeklebt)
--> liegt es an dem returnvalue von etree.xpath?
+bei gegebenem Dateinamen die häufigsten 3 Topics anzeigen lassen
 
+
+mets:structMap//mets:div[@TYPE="volume"]/@LABEL   +     /mets:structMap[@TYPE="LOGICAL"]//mets:div[@ID="'+item+'"]
 '''
 
 from lxml import etree
@@ -30,7 +29,7 @@ def parseXML(directory):
     xpathVolume ='//mets:structMap//mets:div[@TYPE="volume"]/@LABEL'
     filePathYear = mets.xpath(xpathVolume, namespaces={'mets':'http://www.loc.gov/METS/'})
     
-    print(filePathYear)
+    #print(filePathYear)
     #'/Users/MHuber/Documents/SS2016/TopicModelling/
     structLink= mets.xpath('/mets:mets/mets:structLink/mets:smLink', namespaces={'mets':'http://www.loc.gov/METS/',
                                                                                  'xlink':'http://www.w3.org/1999/xlink'})
@@ -66,7 +65,7 @@ def parseXML(directory):
             fileList = d[item]
             #print (fileList)
             createFile(label, fileList)
-            #dir1 als parameter mitgeben um die Information in welchem Band der Artikel zu finden ist zu kreieren
+
 
 def createFile(label, fileList):
     '''
@@ -74,8 +73,8 @@ def createFile(label, fileList):
     dir2 = wo die Datein herkommen
     '''
     dir1 = '/Users/MHuber/Documents/SS2016/TopicModelling/newTry/' + label+'.txt'
-    #print(dir1)
-    dir2 = '/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/fulltext/'
+    print(dir1)
+    dir2 = '/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1919-341909/fulltext/'
     missingFiles=[]
     for item in fileList:
         
@@ -94,12 +93,12 @@ def createFile(label, fileList):
         
         
 
-for item in glob.glob('/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/*/export_mets.xml'):
-    print ('doing: ',item)
-    parseXML(item)
-    print(item, ': done')
+#for item in glob.glob('/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/*/export_mets.xml'):
+ #   print ('doing: ',item)
+  #  parseXML(item)
+   # print(item, ': done')
 
-#parseXML('/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1913-341897/export_mets.xml')
+parseXML('/Users/MHuber/Documents/SS2016/TopicModelling/1913-20/vls-suubdfggb-1919-341909/export_mets.xml')
         
     
     
