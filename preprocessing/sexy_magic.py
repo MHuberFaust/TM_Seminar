@@ -39,6 +39,10 @@ def parseXML(directory, outdir):
                                                                                  'xlink':'http://www.w3.org/1999/xlink'})
     
     d = defaultdict(list)
+    
+    #Das in geschweifter Klammern ist der namespace. Im Document ist das "xlink:"
+    #from und to sind die Attributnamen von smLink
+    
     for child in structLink:
         k = child.get('{http://www.w3.org/1999/xlink}from')
         v = child.get('{http://www.w3.org/1999/xlink}to')
@@ -66,8 +70,12 @@ def createFile(label, fileList, directory, outdir):
     dir1 = wo die Datein hinsollen
     dir2 = wo die Datein herkommen
     '''
-    dir1 = outdir + label[:12] + '\\' + re.sub('[^a-zA-Z0-9]', '_' , re.sub(' ', '' , label[12:100])) + '.txt'
+    
+    print("LABEL ===== " + label)
+    
+    dir1 = outdir + label[:12] + '\\' + re.sub('[^a-zA-ZäüöÄÖÜ0-9_]', '' , re.sub(' ', '_' , label[12:100])) + '.txt'
 
+    print("DIR ==== " + dir1)
     
     dir2 = directory[:-15] + '\\fulltext\\'
 
@@ -112,4 +120,3 @@ def parseFolders(indir, outdir):
         
         
 parseFolders('/raw/', '/pre/')
-
