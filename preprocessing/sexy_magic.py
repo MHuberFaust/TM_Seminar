@@ -71,7 +71,7 @@ def createFile(label, fileList, directory, outdir):
     dir2 = wo die Datein herkommen
     '''
     
-    print("LABEL ===== " + label)
+    #print("LABEL ===== " + label) #buggy in Windows
     
     dir1 = outdir + re.sub(' ', '' , re.sub('[.,]', '_', label[:12])) + '\\' + label[8:12] + "_" + re.sub('[^a-zA-ZäüöÄÖÜß0-9_]', '' , re.sub(' ', '_' , label[12:200])) + '.txt'
 
